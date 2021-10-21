@@ -48,44 +48,46 @@ window.addEventListener("DOMContentLoaded", (event) => {
     });
 });
 
-function save() {
-    let contact = new Contact()
-    contact.id = new Date().getTime()
+function save(event) {
+    alert("save");
+    event.preventDefault();
+    event.stopPropagation();
+    
     try {
-        contact.name = getInputValueById("#name");
+        let contact = createContact();
+        createAndUpdateStorage(contact);
     } catch (error) {
-        setTextValue(".name-error", error);
-        throw error;
+        return(alert(error));
+        
     }
+}
 
-    try {
-        contact.phoneNumber = getInputValueById("#phoneNumber");
-    } catch (error) {
-        setTextValue(".tel-error", error);
-        throw error;
-    }
-    contact.address = getInputValueById("#address");
-    let city = getInputValueById("#city");
-    if (city != "Select City") {
-        contact.city = city;
+function createAndUpdateStorage(contact) {
+    let contactList = JSON.parse(localStorage.getItem("ContactList"));
+    if (contactList != undefined) {
+        contactList.push(contact);
     } else {
-        throw "Please select city";
+        contactList = [contact];
     }
-    let state = getInputValueById("#state");
-    if (state != "Select State") {
-        contact.state = state;
-    } else {
-        throw "Please select state";
-    }
+    alert("Contact Added Sucessfully");
+    localStorage.setItem("contactList", JSON.stringify(contactList));
+}
 
-    try {
-        contact.zip = getInputValueById("#zip");
-    } catch (error) {
-        setTextValue(".zip-error", error);
-        throw error;
-    }
-
-    console.log(contact.toString());
+function createContact() {
+    let contactObject = new Contact();
+    try{
+    contactObject.id = new Date().getTime();
+    contactObject.name = getInputValueById('#name');
+    contactObject.phoneNumber = getInputValueById("#phoneNumber");
+    contactObject.address = getInputValueById('#address');
+    contactObject.state = getInputValueById("#state");
+    contactObject.city = getInputValueById("#city");
+    contactObject.zipcode= getInputValueById("#zipCode");
+    console.log(contactObject.toString());
+} catch (error) {
+    console.log(error);
+}
+return contactObject;
 }
 
 function getInputValueById(property) {

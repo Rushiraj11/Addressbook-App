@@ -8,6 +8,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;1,500&display=swap"
         rel="stylesheet" />
+        <script type="text/javascript" src="../js/ContactForm.js"></script>
     <link rel="stylesheet" href="../css/Form.css">
     <title>Address Book Form</title>
 </head>
@@ -23,10 +24,83 @@
         </div>
     </header>
     <div class="form-content">
-        <form class="form" >
+        <form class="form"  onsubmit="save(event)">
             <div class="form-head">
                 <div class="form-head-text">Person Address Form</div>
-                <a href="../pages/AddressBookForm.html"><img class="form-head-image" src="../assets/icons/cancel.jpeg" alt="logo"></a>
+                
+                <a  href="../pages/AddressBookForm.html"><img class="form-head-image" src="../assets/icons/cancel.jpeg" alt="logo"></a>
+            </div>
+            <div class="form-content">
+                <div class="row-content">
+                    <label for="name" class="label text">Full Name</label>
+                    
+                    <input type="text" class="input" id="name" name="name" placeholder="your name.." required>
+                    <error-output class="name-error"></error-output>
+                </div>
+                <div class="row-content">
+                    <label for="phoneNumber" class="label text">Phone Number</label>
+                    
+                    <input type="tel" class="input" id="phoneNumber" name="phoneNumber" placeholder="" required>
+                    <error-output class="tel-error"></error-output>
+                </div>
+                <div class="row-content">
+                    <label for="address" class="label text">Address</label>
+                
+                    <textarea name="address" id="address" placeholder="" style="height: 100px"required></textarea>
+                </div>
+                <div class="row-content">
+                    <div class="column-constrains">
+                        <div class="column-content">
+                            <label for="city" class="label text">City</label>
+                            <br>
+                            <select name="city"  id="city" required>
+                                <option value="Select City">Select city</option>
+                                <option value="Mumbai">Mumbai</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Bangalore">Bangalore</option>
+                                <option value="Hyderabad">Hyderabad</option>
+                                <option value="Ahmedabad">Ahmedabad</option>
+                                <option value="Chennai">Chennai</option>
+                                <option value="Surat">Surat</option>
+                                <option value="Pune">Pune</option>
+                                <option value="Jaipur">Jaipur</option>
+                                <option value="Lucknow">Lucknow</option>
+                            </select>
+                        </div>
+                        <div class="column-content">
+                            <label for="state" class="label text">State</label>
+                            <br>
+                            <select name="state" id="state">
+                                <option value="Select State">Select state</option>
+                                <option value="Andhra Pradesh">Andhra Pradesh</option>
+                                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                                <option value="Delhi">Delhi</option>
+                                <option value="Goa">Goa</option>
+                                <option value="Gujarat">Gujarat</option>
+                                <option value="Haryana">Haryana</option>
+                                <option value="Himachal Pradesh">Himachal Pradesh</option>
+                                <option value="Karnataka">Karnataka</option>
+                                <option value="Kerala">Kerala</option>
+                                <option value="Madhya Pradesh">Madhya Pradesh</option>
+                                <option value="Maharashtra">Maharashtra</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Rajasthan">Rajasthan</option>
+                                <option value="Tamil Nadu">Tamil Nadu</option>
+                                <option value="Uttar Pradesh">Uttar Pradesh</option>
+                            </select>
+                        </div>
+                        <div class="column-content">
+                            <label for="zip" class="label text">Zip code</label>
+                            <br>
+                            <input type="text" class="input" id="zip" name="zip" required>
+                            <error-output class="zip-error"></error-output>
+                        </div>
+                    </div>
+                </div>
+                <div class="buttons-contact">
+                    <button type="submit" class="button button-text" id="submitButton">Add</button>
+                    <button type="reset" class="button button-text" id="resetButton">Reset</button>
+                </div>
             </div>
         </form>
     </div>

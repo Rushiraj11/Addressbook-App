@@ -48,49 +48,106 @@ window.addEventListener("DOMContentLoaded", (event) => {
     });
 });
 
-function save(event) {
-    alert("save");
-    event.preventDefault();
-    event.stopPropagation();
-    
+const save = () => {
     try {
         let contact = createContact();
         createAndUpdateStorage(contact);
     } catch (error) {
-        return(alert(error));
-        
+        alert(error);
     }
-}
+};
 
-function createAndUpdateStorage(contact) {
+const createAndUpdateStorage = (contact) => {
     let contactList = JSON.parse(localStorage.getItem("ContactList"));
     if (contactList != undefined) {
         contactList.push(contact);
     } else {
         contactList = [contact];
     }
+    alert(contact.toString());
     alert("Contact Added Sucessfully");
-    localStorage.setItem("contactList", JSON.stringify(contactList));
+    localStorage.setItem("ContactList", JSON.stringify(contactList));
 }
 
-function createContact() {
-    let contactObject = new Contact();
-    try{
-    contactObject.id = new Date().getTime();
-    contactObject.name = getInputValueById('#name');
-    contactObject.phoneNumber = getInputValueById("#phoneNumber");
-    contactObject.address = getInputValueById('#address');
-    contactObject.state = getInputValueById("#state");
-    contactObject.city = getInputValueById("#city");
-    contactObject.zipcode= getInputValueById("#zipCode");
-    console.log(contactObject.toString());
-} catch (error) {
-    console.log(error);
-}
-return contactObject;
-}
+const createContact = () => {
+    let contact = new Contact();
+    contact.id = new Date().getTime();
 
-function getInputValueById(property) {
+    try {
+        contact.name = getInputValueById("#name");
+    } catch (error) {
+        setTextValue(".name-error", error);
+        throw error;
+    }
+
+    try {
+        contact.phoneNumber = getInputValueById("#phoneNumber");
+    } catch (error) {
+        setTextValue(".tel-error", error);
+        throw error;
+    }
+
+    try {
+        contact.address = getInputValueById("#address");
+    } catch (error) {
+        setTextValue(".address-error", error);
+        throw error;
+    }
+
+    let city = getInputValueById("#city");
+    if (city != "Select City") {
+        contact.city = city;
+    } else {
+        throw "Please select city";
+    }
+
+    let state = getInputValueById("#state");
+    if (state != "Select State") {
+        contact.state = state;
+    } else {
+        throw "Please select state";
+    }
+
+    try {
+        contact.zip = getInputValueById("#zip");
+    } catch (error) {
+        setTextValue(".zip-error", error);
+        throw error;
+    }
+
+    alert(contact.toString());
+    return contact;
+};
+
+const resetForm = () => {
+    setValue("#name", "");
+    setValue("#phoneNumber", "");
+    setValue("#address", "");
+    setSelectedIndex('#city', 0);
+    setSelectedIndex('#state', 0);
+    setValue("#zip", "");
+    setTextValue(".name-error", "");
+    setTextValue(".tel-error", "");
+    setTextValue(".address-error", "");
+    setTextValue(".zip-error", "");
+};
+
+const setValue = (id, value) => {
+    const element = document.querySelector(id);
+    element.value = value;
+};
+
+const setTextValue = (id, value) => {
+    const element = document.querySelector(id);
+    element.textContent = value;
+};
+
+const setSelectedIndex = (id, index) => {
+    const element = document.querySelector(id);
+    element.selectedIndex = index;
+};
+
+const getInputValueById = (property) => {
     let value = document.querySelector(property).value;
     return value;
-}
+};

@@ -150,21 +150,48 @@ error-output {
     font-style: Bold;
     color: brown;
 }
+
 .buttons-contact {
+    margin-top: 25px;
     display: flex;
     justify-content: flex-end;
-    margin: inherit;
 }
 
 .button {
-    width: 20%;
-    background: #e2e2e2 0% 0% no-repeat padding-box;
+    font-size: 20px;
+    font-family: Roboto;
+    letter-spacing: 0px;
+    color: #42515f;
+    opacity: 1;
+    background: #E2E2E2 0% 0% no-repeat padding-box;
+    border: none;
+    font-weight: 400;
+    min-width: 140px;
+    padding: 7px 7px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    border-radius: 3px;
+    background-color: #fff;
+    margin: 10px;
+}
+
+.button-submit {
+    margin-right: 30px;
+    background: #E2E2E2 0% 0% no-repeat padding-box;
+    border: 1px solid #969696;
     border-radius: 5px;
     opacity: 1;
-    font: normal normal normal 20px/26px Roboto;
-    letter-spacing: 0px;
+}
+
+.button-reset {
+    margin-right: 30px;
+    background: #E2E2E2 0% 0% no-repeat padding-box;
+    border: 1px solid #969696;
+    border-radius: 5px;
     opacity: 1;
-    padding: 12px;
-    margin-left: 80%;
-    text-align: center;
+}
+
+.button-submit:hover {
+    box-shadow: 0px 8px 15px rgba(77, 74, 74, 0.3);
+    background-color: #008cff;
 }
